@@ -45,10 +45,6 @@ public class carcontoller : MonoBehaviour
 
         car.velocity = transform.up * carSpeed;
 
-        if (Input.GetKey("escape"))
-        {
-            Application.Quit();
-        }
 
         timer += Time.deltaTime;
 
