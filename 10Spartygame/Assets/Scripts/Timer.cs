@@ -18,7 +18,7 @@ public class Timer : MonoBehaviour
     {
         timer += Time.deltaTime;
         timerText.text = "Timer: " + Mathf.Round(timer);
-        if(timer >= 10f)
+        if(timer >= 12f)
         {
             Destroy(this);
         }

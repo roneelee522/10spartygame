@@ -6,7 +6,9 @@ public class CameraScript : MonoBehaviour
 {
 
     public GameObject target;
-
+    public AudioClip background;
+    public AudioSource musciSource;
+    private float timer = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -14,6 +16,25 @@ public class CameraScript : MonoBehaviour
 
     }
 
+    void Update()
+    {
+        timer += Time.deltaTime;
+        if(timer >= 3.0f && !musciSource.isPlaying)
+        {
+            musciSource.clip = background;
+            musciSource.Play();
+        }
+
+        if(timer >= 20.0f)
+        {
+            musciSource.Stop();
+        }
+
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
+    }
     // Update is called once per frame
     void LateUpdate()
     {

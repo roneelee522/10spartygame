@@ -9,6 +9,12 @@ public class carcontoller : MonoBehaviour
     public float carAcceleration;
     public Text resultText;
 
+    public AudioClip lightsOne;
+    public AudioClip engine;
+    public AudioClip cheer;
+    public AudioClip boo;
+    public AudioSource soundSource;
+
     private float carSpeed;
     private Rigidbody2D car;
 
@@ -26,9 +32,15 @@ public class carcontoller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (timer >= 3.0f && Input.GetKeyDown(KeyCode.Space))
         {
             carSpeed = carSpeed + carAcceleration * Time.deltaTime;
+            soundSource.clip = engine;
+            if(!soundSource.isPlaying)
+            {
+                soundSource.Play();
+            }
+            
         }
 
         car.velocity = transform.up * carSpeed;
@@ -40,10 +52,30 @@ public class carcontoller : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if (timer >= 10.0f)
+        if (timer >= 11.0f)
         {
             resultText.text = "You Failed!";
+            soundSource.clip = boo;
+            soundSource.Play();
             Destroy(this);
+        }
+
+        if(timer >= 0.9f && timer <= 1.1f)
+        {
+            soundSource.clip = lightsOne;
+            soundSource.Play();
+        }
+
+        if (timer >= 1.9f && timer <= 2.1f)
+        {
+            soundSource.clip = lightsOne;
+            soundSource.Play();
+        }
+
+        if (timer >= 2.9f && timer <= 3.1f)
+        {
+            soundSource.clip = lightsOne;
+            soundSource.Play();
         }
     }
 
@@ -52,6 +84,8 @@ public class carcontoller : MonoBehaviour
         if (other.gameObject.CompareTag("Goal"))
         {
             resultText.text = "Goal!";
+            soundSource.clip = cheer;
+            soundSource.Play();
             Destroy(this);
         }
     }
